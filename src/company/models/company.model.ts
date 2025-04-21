@@ -1,10 +1,13 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Builder } from "src/builders/models/builder.model";
+import { Employe } from "src/employees/models/employee.model";
+import { Machine } from "src/machine/models/machine.model";
 
-interface CompanyCreationAttr{
-    name: string;
-    phone: string;
-    email: string;
-    address: string;
+interface CompanyCreationAttr {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
 }
 
 @Table({ tableName: "company" })
@@ -18,8 +21,8 @@ export class Company extends Model<Company, CompanyCreationAttr> {
 
   @Column({
     type: DataType.STRING(100),
-    allowNull:false,
-    unique:true,
+    allowNull: false,
+    unique: true,
   })
   name: string;
 
@@ -27,14 +30,26 @@ export class Company extends Model<Company, CompanyCreationAttr> {
     type: DataType.STRING(15),
   })
   phone: string;
-  
+
   @Column({
     type: DataType.STRING(50),
   })
   email: string;
-  
+
   @Column({
     type: DataType.STRING,
   })
   address: string;
+
+  @HasMany(() => Builder)
+  buliders: Builder[];
+
+  @HasMany(() => Employe)
+  employees: Employe[];
+
+  @HasMany(() => Machine)
+  machine: Machine[];
+
+  @HasMany(() => Employe)
+  employe: Employe[];
 }
