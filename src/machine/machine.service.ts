@@ -3,17 +3,21 @@ import { CreateMachineDto } from "./dto/create-machine.dto";
 import { UpdateMachineDto } from "./dto/update-machine.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { Machine } from "./models/machine.model";
-import { CompanyService } from "src/company/company.service";
+import { CompanyService } from "../company/company.service";
+import { FileService } from "../file/file.service";
 
 @Injectable()
 export class MachineService {
   constructor(
     @InjectModel(Machine) private machineModule: typeof Machine,
-    private readonly companyService: CompanyService
+    private readonly companyService: CompanyService,
+    private readonly fileService: FileService
   ) {}
 
-  create(createMachineDto: CreateMachineDto) {
-    return this.machineModule.create(createMachineDto);
+  async create(createMachineDto: CreateMachineDto, image: any):Promise <Machine> {
+    const fileName = await this.fileService.saveFile(image)
+
+    return this.machineModule.create({...createMachineDto, image: fileName})
   }
 
   findAll() {

@@ -3,7 +3,7 @@ import { CreateEmployeeDto } from "./dto/create-employee.dto";
 import { UpdateEmployeeDto } from "./dto/update-employee.dto";
 import { InjectModel } from "@nestjs/sequelize";
 import { Employe } from "./models/employee.model";
-import { CompanyService } from "src/company/company.service";
+import { CompanyService } from "../company/company.service";
 
 @Injectable()
 export class EmployeesService {

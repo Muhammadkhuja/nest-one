@@ -1,6 +1,7 @@
 import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import { Role } from "src/roles/models/role.model";
+import { Role } from "../../roles/models/role.model";
 import { UserRoles } from "./user-role.model";
+import { ApiProperty } from "@nestjs/swagger";
 
 interface IUserCreateAttr{
     name: string;
@@ -10,6 +11,10 @@ interface IUserCreateAttr{
 
 @Table({ tableName: "users " })
 export class User extends Model<User, IUserCreateAttr> {
+  @ApiProperty({
+    example: "user1",
+    description: "Foydalanuvch ismi",
+  })
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -17,12 +22,20 @@ export class User extends Model<User, IUserCreateAttr> {
   })
   declare id: number;
 
+  @ApiProperty({
+    example: "user1",
+    description: "Foydalanuvch ismi",
+  })
   @Column({
     type: DataType.STRING(100),
     allowNull: false,
   })
   declare name: string;
 
+  @ApiProperty({
+    example: "user1@mail.com",
+    description: "Foydalanuvch email",
+  })
   @Column({
     type: DataType.STRING(50),
     allowNull: false,
@@ -30,18 +43,21 @@ export class User extends Model<User, IUserCreateAttr> {
   })
   declare email: string;
 
+  @ApiProperty({
+    example: "qwe123",
+    description: "Foydalanuvch password",
+  })
   @Column({
     type: DataType.STRING,
   })
   declare password: string;
 
-
   @Column({
     type: DataType.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   })
   is_active: boolean;
 
-  @BelongsToMany(() => Role, ()=>UserRoles)
-  roles: Role[]
+  @BelongsToMany(() => Role, () => UserRoles)
+  roles: Role[];
 }

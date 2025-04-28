@@ -1,6 +1,11 @@
-import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
-import { BuildingMaterials } from "src/building_materials/models/building_material.model";
-
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from "sequelize-typescript";
+import { BuildingMaterials } from "../../building_materials/models/building_material.model";
 
 interface MaterialsCreationAttr {
   name: string;
@@ -32,6 +37,6 @@ export class Material extends Model<Material, MaterialsCreationAttr> {
   })
   price_per_unit: string;
 
-      @BelongsToMany(() => Material, ()=>BuildingMaterials)
-      material: Material[]
+  @BelongsToMany(() => Material, () => BuildingMaterials)
+  material: Material[];
 }

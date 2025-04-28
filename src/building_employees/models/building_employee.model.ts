@@ -5,8 +5,8 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
-import { Building } from "src/buildings/models/building.model";
-import { Employe } from "src/employees/models/employee.model";
+import { Building } from "../../buildings/models/building.model";
+import { Employe } from "../../employees/models/employee.model";
 
 interface BuildingEmployeecreateAttr {
   buildingId: number;
