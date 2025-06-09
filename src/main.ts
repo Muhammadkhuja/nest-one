@@ -8,7 +8,8 @@ async function start() {
     const PORT = process.env.PORT || 3030;
     const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(new ValidationPipe());
-
+    
+    
     const config = new DocumentBuilder()
       .setTitle("Nest-One project")
       .setDescription("NEST-ONE REST API")
@@ -23,7 +24,7 @@ async function start() {
     await app.listen(PORT, () => {
       console.log(`Server start at: http://localhost${PORT}`);
     });
-  } catch (error) {
+  } catch (error) {`1`
     console.log(error);
   }
 }
